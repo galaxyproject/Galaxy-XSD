@@ -84,6 +84,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="requirement" type="Requirement" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="container" type="Container" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   
@@ -106,8 +107,22 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  
-  
+  <xs:complexType name="Container">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">This tag set is contained within the 'requirements' tag set. Galaxy can be configured to run tools within Docker (https://www.docker.com/) containers - this tag allows the tool to suggest possible valid Docker containers for this tool.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="ContainerType" use="required">
+          <xs:annotation>
+            <xs:documentation xml:lang="en"> This value describes the type of container that the tool may be executed in and currently must be 'docker'. </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:complexType name="Parallelism">
     <xs:annotation>
       <xs:documentation xml:lang="en">Documentation for Parallelism</xs:documentation>
@@ -160,11 +175,7 @@
       <xs:documentation xml:lang="en">Documentation for TestParam</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="embeddedValue" type="xs:string" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Documentation for embeddedValue</xs:documentation>
-        </xs:annotation>
-      </xs:element>
+      <xs:element name="collection" type="TestCollection" minOccurs="0" maxOccurs="1" />
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required">
       <xs:annotation>
@@ -187,16 +198,25 @@
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
+  <xs:complexType name="TestCollection">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Definition of a collection for test input.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="element" type="TestParam" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Type of collection to create.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
   <xs:complexType name="TestOutput">
     <xs:annotation>
       <xs:documentation xml:lang="en">Documentation for TestOutput</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="embeddedValue" type="xs:string" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Documentation for embeddedValue</xs:documentation>
-        </xs:annotation>
-      </xs:element>
+      <xs:element name="assert_contents" type="TestAssertions" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required">
       <xs:annotation>
@@ -219,8 +239,27 @@
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
-  
-  
+  <xs:complexType name="TestAssertions">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Documentation for TestAssertion</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:group ref="TestAssertion" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="TestAssertion">
+    <xs:choice>
+      <xs:element name="has_line" type="TestAssertionHasLine"/>
+      <!-- TODO: implement something to auto generate rest of valid assetions from Python. -->
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="TestAssertionHasLine">
+    <xs:attribute name="line" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Line the test output must contain.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
   <xs:complexType name="Inputs">
     <xs:annotation>
       <xs:documentation xml:lang="en">Consists of all tag sets that define the tool's input parameters. Each &lt;param&gt; tag within the &lt;inputs&gt; tag set maps to a command line parameter within the 'command' tag set described above.</xs:documentation>
@@ -402,6 +441,11 @@
             <xs:documentation xml:lang="en">Documentation for format</xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute name="collection_type" type="xs:string">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Restrict valid collection types for data_collection params (e.g. list, paired, list:paired, etc...).</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="data_ref" type="xs:string">
           <xs:annotation>
             <xs:documentation xml:lang="en">Documentation for data_ref</xs:documentation>
@@ -482,6 +526,7 @@
       <xs:enumeration value="file"/>
       <xs:enumeration value="data"/>
       <xs:enumeration value="drill_down"/>
+      <xs:enumeration value="data_collection"/>
     </xs:restriction>
   </xs:simpleType>
   
@@ -1054,6 +1099,14 @@
       <xs:enumeration value="python-module"/>
       <xs:enumeration value="binary"/>
       <xs:enumeration value="package"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ContainerType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Type of container for tool execution.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="docker"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="ToolTypeType">
