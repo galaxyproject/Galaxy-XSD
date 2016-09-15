@@ -2377,7 +2377,7 @@ and uses whitespace to make a complex command very readable can be found in
 tool.
 
 ```xml
-<command>
+<command><![CDATA[
 bedtools annotate
         -i "${inputA}"
         #if $names.names_select == 'yes':
@@ -2399,7 +2399,7 @@ bedtools annotate
         $counts
         $both
         > "${output}"
-</command>
+]]]]><![CDATA[></command>
 ```
 
 The following example (taken from [xpath](https://github.com/galaxyproject/tools-iuc/blob/master/tools/xpath/xpath.xml) tool)
@@ -2427,6 +2427,7 @@ code file wraps a metadata collection to return metadata parameters wrapped
 according to the Metadata spec.
 
 ```xml
+<command><![CDATA[
         #set genome = $input.metadata.dbkey
         #set datatype = $input.datatype
         mkdir -p output_dir &&
@@ -2455,6 +2456,7 @@ according to the Metadata spec.
             #end if
         #end if
         --output '$output'
+]]]]><![CDATA[></command>
 ```
 
 In additon to demonstrating accessing metadata, this example demonstrates:
