@@ -518,7 +518,7 @@ def get_field_components_options( dataset, field_name ):
     <xs:annotation gxdocs:best_practices="tests">
       <xs:documentation xml:lang="en"><![CDATA[
 
-Tag set to specify tests via the <test> tag sets. Any number of tests can be included,
+Container tag set to specify tests via the <test> tag sets. Any number of tests can be included,
 and each test is wrapped within separate <test> tag sets. Functional tests are
 executed via [Planemo](http://planemo.readthedocs.io/) or the
 [run_tests.sh](https://github.com/galaxyproject/galaxy/blob/dev/run_tests.sh)
