@@ -1782,30 +1782,37 @@ This is an example test case with multiple repeat elements for the example above
 ```xml
 <test>
     <repeat name="series">
-        <param name="input" /path/to/tabular1.tsv" ftype="tabular"/>
+        <param name="input" value="tabular1.tsv" ftype="tabular"/>
         <param name="xcol" value="1"/>
         <param name="ycol" value="2"/>
     </repeat>
     <repeat name="series">
-        <param name="input" /path/to/tabular2.tsv" ftype="tabular"/>
+        <param name="input" value="tabular2.tsv" ftype="tabular"/>
         <param name="xcol" value="4"/>
         <param name="ycol" value="2"/>
     </repeat>
+    <output name="out_file1" file="cool.pdf" ftype="pdf" />
 </test>
 ```
+
+See the documentation on the [``repeat`` test directive](#tool|tests|test|repeat).
 
 An older way to specify repeats in a test is by instances that are created by referring to names with a special format: "<repeat name>_<repeat index>|<param name>"
 
 ```xml
 <test>
-    <param name="series_0|input" value="/path/to/tabular1.tsv" ftype="tabular"/>
+    <param name="series_0|input" value="tabular1.tsv" ftype="tabular"/>
     <param name="series_0|xcol" value="1"/>
     <param name="series_0|ycol" value="2"/>
-    <param name="series_1|input" value="/path/to/tabular2.tsv" ftype="tabular"/>
+    <param name="series_1|input" value="tabular2.tsv" ftype="tabular"/>
     <param name="series_1|xcol" value="4"/>
     <param name="series_1|ycol" value="2"/>
+    <output name="out_file1" file="cool.pdf" ftype="pdf" />
 </test>
 ```
+
+The test tool [disambiguate_repeats.xml](https://github.com/galaxyproject/galaxy/blob/dev/test/functional/tools/disambiguate_repeats.xml)
+demonstrates both testing strategies.
 
 ]]></xs:documentation>
     </xs:annotation>
