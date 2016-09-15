@@ -1642,8 +1642,10 @@ conditionally reference ``${input_type.process_obs_metadata}`` with a Cheetah
 ``if`` statement.
 
 A common use of the conditional wrapper is to select between reference data
-managed by the Galaxy deployer or admin - for instance via Data Managers or
-history files for references. A good example tool that demonstrates this is
+managed by the Galaxy admins (for instance via
+[data managers](https://wiki.galaxyproject.org/Admin/Tools/DataManagers)
+) and
+history files. A good example tool that demonstrates this is
 the [Bowtie 2](https://github.com/galaxyproject/tools-devteam/blob/master/tools/bowtie2/bowtie2_wrapper.xml) wrapper.
 
 ```xml
