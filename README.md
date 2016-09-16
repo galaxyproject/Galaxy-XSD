@@ -3,6 +3,8 @@ Galaxy-XSD
 [![Build Status](https://travis-ci.org/JeanFred/Galaxy-XSD.svg)](http://travis-ci.org/JeanFred/Galaxy-XSD)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
 
+This repository should be considered deprecated, this schema has been updated and migrated into Galaxy [itself](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/tools/xsd).
+
 A Galaxy XML tool wrapper __XML schema definition__ (__XSD__) 
 
 
