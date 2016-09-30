@@ -1,16 +1,17 @@
 Galaxy-XSD
 ==========
-[![Build Status](https://travis-ci.org/JeanFred/Galaxy-XSD.svg)](http://travis-ci.org/JeanFred/Galaxy-XSD)
+[![Build Status](https://travis-ci.org/galaxyproject/Galaxy-XSD.svg)](http://travis-ci.org/galaxyproject/Galaxy-XSD)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-This repository should be considered deprecated, this schema has been updated and migrated into Galaxy [itself](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/tools/xsd).
+**This repository should be considered deprecated, this schema has been updated and migrated into Galaxy [itself](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/tools/xsd).**
 
-A Galaxy XML tool wrapper __XML schema definition__ (__XSD__) 
+A Galaxy tool wrapper XML schema definition (XSD).
 
 
 
 # History
 
+* The schema has been updated and merged into Galaxy itself (https://github.com/galaxyproject/galaxy/pull/2923)
 * Feb-2015 : Pierre Lindenbaum added doc, tests, Java-XML binding file (jxb) for java xml compiler (xjc)  ( https://docs.oracle.com/cd/E19575-01/819-3669/bnbal/index.html )
 * 2013 : extraction to standalone and improvements by Jean-Fred
 * 2011 : Initial work by John Chilton
