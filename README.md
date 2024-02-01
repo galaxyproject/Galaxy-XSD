@@ -1,9 +1,8 @@
 Galaxy-XSD
 ==========
-[![Build Status](https://travis-ci.org/galaxyproject/Galaxy-XSD.svg)](http://travis-ci.org/galaxyproject/Galaxy-XSD)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-**This repository should be considered deprecated, this schema has been updated and migrated into Galaxy [itself](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/tools/xsd).**
+**This repository should be considered deprecated, this schema has been updated and migrated into Galaxy [itself](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/tool_util/xsd).**
 
 A Galaxy tool wrapper XML schema definition (XSD).
 
@@ -43,6 +42,6 @@ This code is free software released under the terms of the MIT license.
 
 # See also:
 
-* Galaxy https://usegalaxy.org/
-* Galaxy Tool XML File https://wiki.galaxyproject.org/Admin/Tools/ToolConfigSyntax
+* Galaxy: https://galaxyproject.org/
+* Galaxy Tool XML File: https://docs.galaxyproject.org/en/latest/dev/schema.html
 
